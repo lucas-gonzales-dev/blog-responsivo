@@ -1,0 +1,733 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 
+   Base: 16px = 1rem
+   Conversões: 
+   - 10px = 0.625rem
+   - 12px = 0.75rem
+   - 14px = 0.875rem
+   - 16px = 1rem
+   - 20px = 1.25rem
+   - 24px = 1.5rem
+   - 32px = 2rem
+   - 36px = 2.25rem
+   - 48px = 3rem
+   - 70px = 4.375rem
+   - 96px = 6rem
+   - 132px = 8.25rem
+   - 156px = 9.75rem
+   - 191px = 11.9375rem
+   - 360px = 22.5rem
+   - 396px = 24.75rem
+   - 744px = 46.5rem
+   - 1440px = 90rem
+*/
+
+:root {
+    font-size: 100%; /* 16px base */
+    --accent: #02a28f;
+    --text-dark: #333;
+    --text-gray: #616161;
+    --bg-light: #f4f4f4;
+    --white: #fff;
+    --card-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.10);
+    --widget-shadow: 0 0.625rem 0.625rem rgba(0, 0, 0, 0.10);
+    
+    /* Desktop dimensions in rem (Figma 1440px = 90rem) */
+    --gutter-desktop: 9.75rem;
+    --navbar-height: 4.375rem;
+    --footer-height: 3rem;
+    --banner-width: 46.5rem;
+    --banner-height: 24.75rem;
+    --sidebar-width: 22.5rem;
+    --card-width: 22.5rem;
+    --card-height: 24.75rem;
+    --sidebar-title-height: 3rem;
+    --section-header-height: 3.5rem;
+    --side-card-height: 6rem;
+    --side-image-width: 8.25rem;
+    --side-image-height: 4.375rem;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--white);
+}
+
+.container {
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: 0 var(--gutter-desktop);
+}
+
+/* Accessibility: Skip link */
+.skip-link {
+    position: absolute;
+    left: -999em;
+    top: auto;
+    width: 0.0625rem;
+    height: 0.0625rem;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    z-index: 9999;
+}
+
+/* ================================
+   NAVBAR
+   ================================ */
+.navbar {
+    background-color: var(--accent);
+    height: var(--navbar-height);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 var(--gutter-desktop);
+}
+
+.navbar h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0;
+    line-height: normal;
+}
+
+/* ================================
+   MAIN LAYOUT - DESKTOP (Grid)
+   ================================ */
+main {
+    padding: 3.125rem 0 0 0;
+    background-color: var(--white);
+}
+
+main > .container {
+    display: grid;
+    grid-template-columns: var(--banner-width) var(--sidebar-width);
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    align-items: start;
+    justify-content: center;
+}
+
+.banner {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.sidebar {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-self: start;
+}
+
+.recent-posts {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 2.5rem;
+    align-self: start;
+}
+
+/* ================================
+   BANNER ARTICLE
+   ================================ */
+.banner-article {
+    position: relative;
+    width: var(--banner-width);
+    height: var(--banner-height);
+    border-radius: 0.625rem;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.banner-article .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.banner-article .banner-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.625rem;
+    background: linear-gradient(to bottom, rgba(102, 102, 102, 0) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+.banner-content {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 2;
+    color: var(--white);
+}
+
+.banner-content .category {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.0625rem;
+    line-height: normal;
+}
+
+.banner-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.0625rem 0;
+    line-height: normal;
+    color: var(--white);
+}
+
+.banner-content .author {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.banner-content .by {
+    font-weight: 700;
+}
+
+/* ================================
+   SECTION HEADER (Posts mais recentes)
+   ================================ */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: var(--accent);
+    padding: 1rem 1.5rem;
+    height: var(--section-header-height);
+    border-radius: 0.5rem;
+    box-shadow: var(--widget-shadow);
+    color: var(--white);
+    margin-bottom: 1.5rem;
+}
+
+.section-header .widget-title,
+.section-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--white);
+    line-height: normal;
+}
+
+.section-header .view-all,
+.section-header a.view-all {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+}
+
+/* ================================
+   POSTS GRID
+   ================================ */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, var(--card-width));
+    gap: 1.5rem;
+    justify-content: start;
+}
+
+/* ================================
+   POST CARD
+   ================================ */
+.post-card {
+    background-color: transparent;
+    overflow: visible;
+    width: var(--card-width);
+    height: var(--card-height);
+    position: relative;
+}
+
+.post-image {
+    height: 11.9375rem;
+    background-color: #d9d9d9;
+    overflow: hidden;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.post-content {
+    background: var(--white);
+    position: absolute;
+    top: 11.9375rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.post-category {
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 400;
+}
+
+.post-content h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: #000;
+}
+
+.post-author {
+    font-size: 0.875rem;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.post-author .by {
+    font-weight: 700;
+}
+
+.post-excerpt {
+    font-size: 0.875rem;
+    color: #000;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+/* ================================
+   SIDEBAR WIDGETS
+   ================================ */
+.widget-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--sidebar-title-height);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.625rem;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 1.25rem;
+    font-weight: 700;
+    box-shadow: var(--widget-shadow);
+    margin-bottom: 1.25rem;
+}
+
+.popular-posts,
+.categories {
+    width: var(--sidebar-width);
+}
+
+.popular-posts .widget-title,
+.categories .widget-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--sidebar-title-height);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.625rem;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 1.25rem;
+    font-weight: 700;
+    box-shadow: var(--widget-shadow);
+    margin-bottom: 1.25rem;
+}
+
+/* ================================
+   SIDE CARD (Popular posts item)
+   ================================ */
+.side-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 0.625rem;
+    padding: 0.8125rem 0.75rem;
+    margin-bottom: 1.25rem;
+    height: var(--side-card-height);
+    width: 100%;
+}
+
+.side-card:last-child {
+    margin-bottom: 0;
+}
+
+.side-image {
+    width: var(--side-image-width);
+    height: var(--side-image-height);
+    background-color: #d9d9d9;
+    border-radius: 0.625rem;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.side-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.side-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 0;
+}
+
+.side-content h4 {
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #000;
+}
+
+.side-date {
+    font-size: 0.75rem;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+/* ================================
+   CATEGORIES
+   ================================ */
+.categories ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+.categories li {
+    margin: 0;
+}
+
+.categories a {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.categories span {
+    color: var(--text-gray);
+}
+
+/* ================================
+   FOOTER
+   ================================ */
+footer {
+    background-color: var(--accent);
+    color: var(--white);
+    height: var(--footer-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+footer p {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* ================================
+   MOBILE STYLES (max-width: 48rem / 768px)
+   Based on Figma Mobile frame: 384px / 24rem
+   ================================ */
+@media (max-width: 48rem) {
+    :root {
+        --gutter-mobile: 0.5rem;
+    }
+
+    .container {
+        padding: 0 var(--gutter-mobile);
+    }
+
+    /* Navbar - centered title */
+    .navbar {
+        justify-content: center;
+    }
+
+    .navbar .container {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .navbar h1 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    /* Main - single column layout */
+    main {
+        padding: 1.5rem 0 0 0;
+    }
+
+    main > .container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0 var(--gutter-mobile);
+    }
+
+    /* Banner - full width with margins */
+    .banner-article {
+        width: 100%;
+        max-width: 23rem;
+        height: 24.75rem;
+        aspect-ratio: unset;
+    }
+
+    .banner-content h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Section header - smaller padding */
+    .section-header {
+        padding: 0.5rem 1rem;
+        height: 2.5rem;
+        border-radius: 0.625rem;
+    }
+
+    /* Posts grid - single column */
+    .posts-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        justify-items: center;
+    }
+
+    .post-card {
+        width: 100%;
+        max-width: 22.5rem;
+        height: auto;
+    }
+
+    .post-content {
+        position: relative;
+        top: 0;
+    }
+
+    /* Sidebar - full width stacked below posts */
+    .sidebar {
+        width: 100%;
+        max-width: 23rem;
+        margin: 0 auto;
+    }
+
+    .popular-posts,
+    .categories {
+        width: 100%;
+    }
+
+    .popular-posts .widget-title,
+    .categories .widget-title {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .side-card {
+        width: 100%;
+    }
+
+    .side-image {
+        width: 8.375rem;
+        border-radius: 0.5rem;
+    }
+
+    /* Categories title centered */
+    .categories .widget-title {
+        justify-content: center;
+    }
+
+    /* Footer */
+    footer .container {
+        justify-content: center;
+    }
+}
+
+/* ================================
+   TABLET STYLES (48.0625rem - 63.9375rem / 769px - 1023px)
+   ================================ */
+@media (min-width: 48.0625rem) and (max-width: 63.9375rem) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .navbar .container {
+        padding: 0 1.5rem;
+    }
+
+    .navbar h1 {
+        font-size: 1.75rem;
+    }
+
+    main > .container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .banner-article {
+        width: 100%;
+        max-width: 46.5rem;
+        height: auto;
+        aspect-ratio: 744 / 396;
+        margin: 0 auto;
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        max-width: 46.5rem;
+        margin: 0 auto;
+    }
+
+    .post-card {
+        width: 100%;
+        max-width: 22.5rem;
+        height: auto;
+    }
+
+    .post-content {
+        position: relative;
+        top: 0;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-width: 46.5rem;
+        margin: 0 auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .popular-posts,
+    .categories {
+        width: 48%;
+    }
+}
+
+/* ================================
+   DESKTOP STYLES (min-width: 64rem / 1024px)
+   Figma Desktop frame: 1440px / 90rem
+   ================================ */
+@media (min-width: 64rem) {
+    .container {
+        padding: 0 var(--gutter-desktop);
+    }
+
+    .navbar .container {
+        padding: 0 var(--gutter-desktop);
+    }
+
+    main > .container {
+        display: grid;
+        grid-template-columns: var(--banner-width) var(--sidebar-width);
+        grid-template-rows: auto auto;
+        gap: 1.5rem;
+        align-items: start;
+        justify-content: center;
+    }
+
+    .banner {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .sidebar {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        width: var(--sidebar-width);
+    }
+
+    .recent-posts {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .banner-article {
+        width: var(--banner-width);
+        height: var(--banner-height);
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(2, var(--card-width));
+    }
+
+    .post-card {
+        width: var(--card-width);
+        height: var(--card-height);
+    }
+
+    .post-content {
+        position: absolute;
+        top: 11.9375rem;
+    }
+
+    .popular-posts,
+    .categories {
+        width: var(--sidebar-width);
+    }
+}
+
+/* ================================
+   ULTRAWIDE STYLES (min-width: 160rem / 2560px)
+   Mantém o layout centralizado com max-width
+   ================================ */
+@media (min-width: 160rem) {
+    .container {
+        max-width: 90rem;
+        margin: 0 auto;
+    }
+}
