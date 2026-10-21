@@ -17,8 +17,8 @@ Página web de blog com design moderno e totalmente responsivo, adaptável a dif
 Clone o repositório:
 
 ```bash
-git clone https://github.com/lucas-gonzales/RID99751_Desafio_Desenvolvendo_um_Blog_Responsivo.git
-cd RID99751_Desafio_Desenvolvendo_um_Blog_Responsivo
+git clone https://github.com/lucas-gonzales-dev/blog-responsivo.git
+cd blog-responsivo
 ```
 
 Abra o arquivo `index.html` no navegador.
